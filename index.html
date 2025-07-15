@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pak SEO Tools - Account Credentials</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>SEO Tools Account Generator</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
@@ -17,10 +20,15 @@
             secondary: '#3f37c9',
             accent: '#4cc9f0',
             dark: '#1d3557',
-            light: '#f8f9fa'
+            light: '#f8f9fa',
+            jin: '#8b5cf6',
+            pak: '#3b82f6',
+            darkbg: '#0f172a'
           },
           fontFamily: {
-            'sans': ['Poppins', 'sans-serif']
+            'sans': ['Poppins', 'sans-serif'],
+            'fancy': ['Playfair Display', 'serif'],
+            'decorative': ['Dancing Script', 'cursive']
           },
           boxShadow: {
             'custom': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
@@ -33,13 +41,23 @@
   <script>
     function updateMessage() {
       const username = document.getElementById('username').value.trim();
+      const toolSelect = document.getElementById('tool-select');
+      const selectedTool = toolSelect.value;
+
+      let toolName = "";
+      let loginLink = "";
+      let toolColor = "";
+      let toolIcon = "";
+
+ 
+
       const message = `
-✨ Your Login Details ✨
+🌟 Your ${toolName} Account Credentials 🌟
 
 👤 Username: ${username}
 🔑 Password: ${username}
 
-🌐 Login Link: https://app.pakseotools.com/
+🌐 Login Link: ${loginLink}
 
 📌 Important Notes:
 • Login from only 1 device and 1 browser
@@ -56,12 +74,17 @@ Join our WhatsApp group for updates, offers & giveaways:
 • How to Access on Mobile: 
   https://www.youtube.com/watch?v=7R7CnbtUl0c
 
-Thank you for choosing JinTools! 🚀
+Thank you for choosing Jin tools 🚀
       `;
-      document.getElementById('copy-text').value = message;
 
-      // Enable copy button when there's content
+      document.getElementById('copy-text').value = message;
+      document.getElementById('tool-icon').className = `${toolIcon} text-3xl text-${toolColor}-500`;
+      document.getElementById('tool-title').innerText = `${toolName} Credentials`;
       document.getElementById('copy-btn').disabled = username === '';
+
+      // Update UI colors
+      document.getElementById('copy-btn').className =
+        `copy-btn bg-${toolColor}-600 hover:bg-${toolColor}-700 text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-300 inline-flex items-center pulse`;
     }
 
     function copyToClipboard() {
@@ -75,31 +98,116 @@ Thank you for choosing JinTools! 🚀
       toast.classList.remove('opacity-0', 'translate-y-10');
       toast.classList.add('opacity-100', 'translate-y-0');
 
+      // Button animation
+      const btn = document.getElementById('copy-btn');
+      btn.innerHTML = '<i class="fas fa-check mr-3"></i> Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.innerHTML = '<i class="fas fa-copy mr-3"></i> Copy to Clipboard';
+        btn.classList.remove('copied');
+      }, 2000);
+
       setTimeout(() => {
         toast.classList.remove('opacity-100', 'translate-y-0');
         toast.classList.add('opacity-0', 'translate-y-10');
       }, 3000);
     }
 
-    // Initialize with disabled button
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      html.classList.toggle('dark');
+      const isDark = html.classList.contains('dark');
+      localStorage.setItem('darkMode', isDark);
+      document.getElementById('dark-mode-toggle').innerHTML = isDark ?
+        '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+
+    function generateRandomUsername() {
+      const prefixes = ['seo', 'digital', 'marketing', 'web', 'analytics', 'growth'];
+      const suffixes = ['pro', 'expert', 'master', 'ninja', 'guru', 'wizard'];
+      const numbers = Math.floor(100 + Math.random() * 900);
+
+      const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+      const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+
+      const username = `${prefix}_${suffix}${numbers}`;
+      document.getElementById('username').value = username;
+      updateMessage();
+    }
+
+    function togglePasswordVisibility() {
+      const textArea = document.getElementById('copy-text');
+      const content = textArea.value;
+
+      if (content.includes('🔑 Password: ********')) {
+        // Restore original password
+        const username = document.getElementById('username').value.trim();
+        const newContent = content.replace('🔑 Password: ********', `🔑 Password: ${username}`);
+        textArea.value = newContent;
+        document.getElementById('eye-icon').className = 'fas fa-eye';
+      } else {
+        // Mask password
+        const newContent = content.replace(/🔑 Password: .+/g, '🔑 Password: ********');
+        textArea.value = newContent;
+        document.getElementById('eye-icon').className = 'fas fa-eye-slash';
+      }
+    }
+
+    // Initialize
     document.addEventListener('DOMContentLoaded', function () {
+      // Set dark mode based on preference
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.documentElement.classList.add('dark');
+        document.getElementById('dark-mode-toggle').innerHTML = '<i class="fas fa-sun"></i>';
+      }
+
       document.getElementById('copy-btn').disabled = true;
+      updateMessage();
     });
   </script>
   <style>
     body {
-      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+      background: linear-gradient(135deg, #f0f4ff 0%, #e6f0ff 100%);
       min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233b82f6' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+
+    .dark body {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     }
 
     .card {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border-radius: 16px;
+      border-radius: 20px;
       overflow: hidden;
+      background: linear-gradient(145deg, #ffffff, #f5f7ff);
+      box-shadow: 0 15px 30px rgba(67, 97, 238, 0.15);
+      position: relative;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .dark .card {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(67, 97, 238, 0.2);
     }
 
     .input-field:focus {
@@ -110,6 +218,14 @@ Thank you for choosing JinTools! 🚀
       resize: none;
       scrollbar-width: thin;
       scrollbar-color: #4361ee #f1f1f1;
+      background: linear-gradient(to bottom, #fafbff, #f0f4ff);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+    }
+
+    .dark .textarea-field {
+      background: linear-gradient(to bottom, #1e293b, #0f172a);
+      color: #cbd5e1;
     }
 
     .textarea-field::-webkit-scrollbar {
@@ -125,22 +241,34 @@ Thank you for choosing JinTools! 🚀
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 6px 15px rgba(67, 97, 238, 0.3);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
     }
 
     .copy-btn:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
     }
 
     .copy-btn:active {
       transform: translateY(1px);
     }
 
+    .copy-btn.copied {
+      background: linear-gradient(to right, #10b981, #059669) !important;
+      box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4) !important;
+    }
+
     .toast {
       transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      background: linear-gradient(to right, #4361ee, #3f37c9);
+      box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
+      z-index: 100;
     }
 
     .bounce {
-      animation: bounce 0.5s ease;
+      animation: bounce 1.2s ease infinite;
     }
 
     @keyframes bounce {
@@ -151,7 +279,7 @@ Thank you for choosing JinTools! 🚀
       }
 
       50% {
-        transform: translateY(-10px);
+        transform: translateY(-15px);
       }
     }
 
@@ -165,61 +293,174 @@ Thank you for choosing JinTools! 🚀
       }
 
       70% {
-        box-shadow: 0 0 0 12px rgba(67, 97, 238, 0);
+        box-shadow: 0 0 0 15px rgba(67, 97, 238, 0);
       }
 
       100% {
         box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
       }
     }
+
+    .tool-select {
+      background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") right 1rem center no-repeat;
+      background-size: 1.5em;
+      appearance: none;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .tool-card {
+      transition: all 0.3s ease;
+      transform: perspective(1000px) rotateX(0deg);
+    }
+
+    .tool-card:hover {
+      transform: perspective(1000px) rotateX(5deg);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+      background-size: 300% 300%;
+      animation: gradientBG 12s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .fancy-heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+    }
+
+    .decorative-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+    }
+
+    .dark .decorative-text {
+      color: #cbd5e1;
+    }
+
+    .random-btn {
+      transition: all 0.3s ease;
+    }
+
+    .random-btn:hover {
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    .eye-btn {
+      transition: all 0.3s ease;
+    }
+
+    .eye-btn:hover {
+      transform: scale(1.1);
+    }
   </style>
 </head>
 
-<body class="font-sans text-gray-800 p-4 md:p-8">
+<body class="font-sans text-gray-800 dark:text-gray-200 p-4 md:p-8">
   <div class="max-w-2xl mx-auto">
-    <header class="text-center mb-10 mt-6">
+    <div class="text-right mb-4">
+      <button id="dark-mode-toggle" onclick="toggleDarkMode()"
+        class="p-3 rounded-full bg-white dark:bg-gray-800 shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+
+    <header class="text-center mb-10 mt-2">
       <div class="flex items-center justify-center mb-4">
-        <div class="bg-primary p-3 rounded-full mr-4 bounce">
-          <i class="fas fa-key text-white text-2xl"></i>
+        <div class="gradient-bg p-4 rounded-full mr-4 bounce">
+          <i class="fas fa-key text-white text-3xl"></i>
         </div>
         <h1
-          class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Pak SEO Tools</h1>
+          class="text-3xl md:text-4xl fancy-heading bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+          SEO Tools Account Generator</h1>
       </div>
-      <p class="text-gray-600 max-w-md mx-auto">Generate and copy your account credentials with one click</p>
+      <p class="text-gray-600 dark:text-gray-300 max-w-md mx-auto">Generate credentials for your preferred SEO tool</p>
+      <p class="decorative-text mt-2 text-blue-600 dark:text-blue-300">Create & share credentials with ease</p>
     </header>
 
-    <div class="card bg-white shadow-custom border border-gray-100 mb-8">
+    <div class="card mb-8">
       <div class="p-6 md:p-8">
+        <div class="flex items-center mb-6">
+          <i id="tool-icon" class="fas fa-chart-line text-3xl text-pak-500"></i>
+          <h2 id="tool-title" class="text-2xl font-bold ml-3 fancy-heading">Pak SEO Tools Credentials</h2>
+        </div>
+
         <div class="mb-8">
-          <label for="username" class="block text-lg font-medium text-gray-700 mb-2 flex items-center">
+          <label for="tool-select"
+            class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center">
+            <i class="fas fa-tools mr-2 text-primary"></i>
+            Select SEO Tool
+          </label>
+          <div class="relative">
+            <select id="tool-select"
+              class="w-full tool-select border border-gray-300 dark:border-gray-600 rounded-xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 appearance-none bg-white dark:bg-gray-800 dark:text-gray-200"
+              onchange="updateMessage()">
+              <option value="pak">Pak SEO Tools</option>
+              <option value="jin">Jin Tools</option>
+            </select>
+            <div class="absolute right-5 top-1/2 transform -translate-y-1/2 pointer-events-none">
+              <i class="fas fa-chevron-down text-gray-400"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-8">
+          <label for="username"
+            class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center">
             <i class="fas fa-user-circle mr-2 text-primary"></i>
             Enter Your Username
           </label>
           <div class="relative">
             <input id="username" type="text" placeholder="your_username"
-              class="w-full input-field border border-gray-300 rounded-xl px-5 py-4 text-lg focus:outline-none focus:ring-0"
+              class="w-full input-field border border-gray-300 dark:border-gray-600 rounded-xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 bg-white dark:bg-gray-800 dark:text-gray-200"
               oninput="updateMessage()" />
-            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-              <i class="fas fa-user"></i>
+            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 flex space-x-2">
+              <button onclick="generateRandomUsername()"
+                class="random-btn text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
+                <i class="fas fa-dice"></i>
+              </button>
+              <div class="text-gray-400">
+                <i class="fas fa-user"></i>
+              </div>
             </div>
           </div>
-          <p class="mt-2 text-sm text-gray-500">Enter the username provided to you</p>
+          <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Enter the username provided to you</p>
         </div>
 
         <div class="mb-8">
-          <label class="block text-lg font-medium text-gray-700 mb-2 flex items-center">
-            <i class="fas fa-file-alt mr-2 text-primary"></i>
-            Account Information
-          </label>
+          <div class="flex justify-between items-center mb-2">
+            <label class="block text-lg font-medium text-gray-700 dark:text-gray-300 flex items-center">
+              <i class="fas fa-file-alt mr-2 text-primary"></i>
+              Account Information
+            </label>
+            <button onclick="togglePasswordVisibility()"
+              class="eye-btn text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+              <i id="eye-icon" class="fas fa-eye"></i>
+            </button>
+          </div>
           <textarea id="copy-text"
-            class="w-full textarea-field h-72 border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-0 bg-gray-50"
+            class="w-full textarea-field h-72 border border-gray-300 dark:border-gray-600 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:text-gray-200"
             readonly placeholder="Your credentials will appear here after entering username"></textarea>
         </div>
 
         <div class="text-center">
           <button id="copy-btn" onclick="copyToClipboard()"
-            class="copy-btn bg-primary hover:bg-secondary text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-300 inline-flex items-center pulse">
+            class="copy-btn bg-pak-600 hover:bg-pak-700 text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-300 inline-flex items-center pulse">
             <i class="fas fa-copy mr-3"></i>
             Copy to Clipboard
           </button>
@@ -227,41 +468,49 @@ Thank you for choosing JinTools! 🚀
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-      <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100">
-        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center mb-4">
-          <i class="fas fa-lock text-white text-xl"></i>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      <div
+        class="tool-card bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/30 p-6 rounded-xl border border-blue-100 dark:border-blue-900/50">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-full bg-pak-500 flex items-center justify-center mr-4">
+            <i class="fas fa-chart-line text-white text-xl"></i>
+          </div>
+          <h3 class="font-semibold text-lg">Pak SEO Tools</h3>
         </div>
-        <h3 class="font-semibold text-lg mb-2">Security First</h3>
-        <p class="text-gray-600">Use only one browser/device to keep your account secure</p>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Comprehensive SEO suite with advanced analytics and tracking
+          features.</p>
+        <div class="flex items-center text-sm text-blue-600 dark:text-blue-400">
+          <i class="fas fa-link mr-2"></i>
+          <span>https://app.pakseotools.com/</span>
+        </div>
       </div>
 
-      <div class="bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-xl border border-cyan-100">
-        <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center mb-4">
-          <i class="fas fa-sync-alt text-white text-xl"></i>
+      <div
+        class="tool-card bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/30 dark:to-violet-900/30 p-6 rounded-xl border border-purple-100 dark:border-purple-900/50">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-full bg-jin-500 flex items-center justify-center mr-4">
+            <i class="fas fa-magic text-white text-xl"></i>
+          </div>
+          <h3 class="font-semibold text-lg">Jin Tools</h3>
         </div>
-        <h3 class="font-semibold text-lg mb-2">Stay Updated</h3>
-        <p class="text-gray-600">Join our WhatsApp group for latest updates and offers</p>
-      </div>
-
-      <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-xl border border-indigo-100">
-        <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mb-4">
-          <i class="fas fa-video text-white text-xl"></i>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">AI-powered SEO tools for content optimization and performance
+          analysis.</p>
+        <div class="flex items-center text-sm text-purple-600 dark:text-purple-400">
+          <i class="fas fa-link mr-2"></i>
+          <span>https://app.jintools.com/</span>
         </div>
-        <h3 class="font-semibold text-lg mb-2">Video Guides</h3>
-        <p class="text-gray-600">Watch our tutorials for seamless onboarding</p>
       </div>
     </div>
 
     <div id="toast"
-      class="toast fixed bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 translate-y-10 bg-primary text-white px-6 py-3 rounded-full shadow-lg flex items-center">
+      class="toast fixed bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 translate-y-10 text-white px-6 py-3 rounded-full shadow-lg flex items-center">
       <i class="fas fa-check-circle mr-2"></i>
       Successfully copied to clipboard!
     </div>
   </div>
 
-  <footer class="text-center text-gray-600 text-sm mt-12 pb-6">
-    <p>© Jin tools Tools. All rights reserved.</p>
+  <footer class="text-center text-gray-600 dark:text-gray-400 text-sm mt-12 pb-6">
+    <p>© 2023 SEO Tools Account Generator. All rights reserved.</p>
   </footer>
 </body>
 
