@@ -4,60 +4,265 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Copy Credentials</title>
+  <title>Pak SEO Tools - Account Credentials</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4361ee',
+            secondary: '#3f37c9',
+            accent: '#4cc9f0',
+            dark: '#1d3557',
+            light: '#f8f9fa'
+          },
+          fontFamily: {
+            'sans': ['Poppins', 'sans-serif']
+          },
+          boxShadow: {
+            'custom': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+            'inner-lg': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.15)'
+          }
+        }
+      }
+    }
+  </script>
   <script>
     function updateMessage() {
       const username = document.getElementById('username').value.trim();
       const message = `
-username : ${username}
-password : ${username}
+✨ Your Login Details ✨
 
-login link :  https://app.pakseotools.com/
+👤 Username: ${username}
+🔑 Password: ${username}
 
-Follow WhatsApp Group For Updates & Offers 🫴 And Giveaways ✅ 
+🌐 Login Link: https://app.pakseotools.com/
 
-☀ https://whatsapp.com/channel/0029Vb5nR5f1yT24Ur8UOo0i
+📌 Important Notes:
+• Login from only 1 device and 1 browser
+• Multiple logins will result in automatic account blocking
+• No account replacements for policy violations
 
-⭕Note: Login to 1 device and in 1 Browser Only, Otherwise your account will be blocked automatically, and No Replacement ⭕
+📲 Stay Updated:
+Join our WhatsApp group for updates, offers & giveaways:
+👉 https://whatsapp.com/channel/0029Vb5nR5f1yT24Ur8UOo0i
 
-Guidance Video
+📺 Guidance Videos:
+• How to Access on Laptop/PC: 
+  https://www.loom.com/share/c6cfc3ecc90f46958cf073a3e707324c
+• How to Access on Mobile: 
+  https://www.youtube.com/watch?v=7R7CnbtUl0c
 
-How to Access Pak Tool Subscription Laptop/Pc
-https://www.loom.com/share/c6cfc3ecc90f46958cf073a3e707324c
-
-How to Access Pak Tool Subscription Mobile
-https://www.youtube.com/watch?v=7R7CnbtUl0c
+Thank you for choosing JinTools! 🚀
       `;
       document.getElementById('copy-text').value = message;
+
+      // Enable copy button when there's content
+      document.getElementById('copy-btn').disabled = username === '';
     }
 
     function copyToClipboard() {
       const textArea = document.getElementById('copy-text');
       textArea.select();
-      textArea.setSelectionRange(0, 99999); // For mobile devices
+      textArea.setSelectionRange(0, 99999);
       document.execCommand("copy");
-      alert("Copied to clipboard!");
+
+      // Show toast notification
+      const toast = document.getElementById('toast');
+      toast.classList.remove('opacity-0', 'translate-y-10');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-10');
+      }, 3000);
     }
+
+    // Initialize with disabled button
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('copy-btn').disabled = true;
+    });
   </script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+      min-height: 100vh;
+    }
+
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .input-field:focus {
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.3);
+    }
+
+    .textarea-field {
+      resize: none;
+      scrollbar-width: thin;
+      scrollbar-color: #4361ee #f1f1f1;
+    }
+
+    .textarea-field::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .textarea-field::-webkit-scrollbar-thumb {
+      background-color: #4361ee;
+      border-radius: 4px;
+    }
+
+    .copy-btn {
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .copy-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .copy-btn:active {
+      transform: translateY(1px);
+    }
+
+    .toast {
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    .bounce {
+      animation: bounce 0.5s ease;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 12px rgba(67, 97, 238, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
+      }
+    }
+  </style>
 </head>
 
-<body class="bg-gray-100 p-6">
+<body class="font-sans text-gray-800 p-4 md:p-8">
+  <div class="max-w-2xl mx-auto">
+    <header class="text-center mb-10 mt-6">
+      <div class="flex items-center justify-center mb-4">
+        <div class="bg-primary p-3 rounded-full mr-4 bounce">
+          <i class="fas fa-key text-white text-2xl"></i>
+        </div>
+        <h1
+          class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          Pak SEO Tools</h1>
+      </div>
+      <p class="text-gray-600 max-w-md mx-auto">Generate and copy your account credentials with one click</p>
+    </header>
 
-  <div class="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md">
-    <h1 class="text-xl font-semibold mb-4">Enter Username to Copy Login Info</h1>
+    <div class="card bg-white shadow-custom border border-gray-100 mb-8">
+      <div class="p-6 md:p-8">
+        <div class="mb-8">
+          <label for="username" class="block text-lg font-medium text-gray-700 mb-2 flex items-center">
+            <i class="fas fa-user-circle mr-2 text-primary"></i>
+            Enter Your Username
+          </label>
+          <div class="relative">
+            <input id="username" type="text" placeholder="your_username"
+              class="w-full input-field border border-gray-300 rounded-xl px-5 py-4 text-lg focus:outline-none focus:ring-0"
+              oninput="updateMessage()" />
+            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+          <p class="mt-2 text-sm text-gray-500">Enter the username provided to you</p>
+        </div>
 
-    <input id="username" type="text" placeholder="Enter username"
-      class="w-full border border-gray-300 rounded px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
-      oninput="updateMessage()" />
+        <div class="mb-8">
+          <label class="block text-lg font-medium text-gray-700 mb-2 flex items-center">
+            <i class="fas fa-file-alt mr-2 text-primary"></i>
+            Account Information
+          </label>
+          <textarea id="copy-text"
+            class="w-full textarea-field h-72 border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-0 bg-gray-50"
+            readonly placeholder="Your credentials will appear here after entering username"></textarea>
+        </div>
 
-    <textarea id="copy-text" class="w-full h-64 border border-gray-300 rounded px-4 py-2 mb-4" readonly></textarea>
+        <div class="text-center">
+          <button id="copy-btn" onclick="copyToClipboard()"
+            class="copy-btn bg-primary hover:bg-secondary text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-300 inline-flex items-center pulse">
+            <i class="fas fa-copy mr-3"></i>
+            Copy to Clipboard
+          </button>
+        </div>
+      </div>
+    </div>
 
-    <button onclick="copyToClipboard()" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
-      Copy Message
-    </button>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100">
+        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center mb-4">
+          <i class="fas fa-lock text-white text-xl"></i>
+        </div>
+        <h3 class="font-semibold text-lg mb-2">Security First</h3>
+        <p class="text-gray-600">Use only one browser/device to keep your account secure</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-xl border border-cyan-100">
+        <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center mb-4">
+          <i class="fas fa-sync-alt text-white text-xl"></i>
+        </div>
+        <h3 class="font-semibold text-lg mb-2">Stay Updated</h3>
+        <p class="text-gray-600">Join our WhatsApp group for latest updates and offers</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-xl border border-indigo-100">
+        <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mb-4">
+          <i class="fas fa-video text-white text-xl"></i>
+        </div>
+        <h3 class="font-semibold text-lg mb-2">Video Guides</h3>
+        <p class="text-gray-600">Watch our tutorials for seamless onboarding</p>
+      </div>
+    </div>
+
+    <div id="toast"
+      class="toast fixed bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 translate-y-10 bg-primary text-white px-6 py-3 rounded-full shadow-lg flex items-center">
+      <i class="fas fa-check-circle mr-2"></i>
+      Successfully copied to clipboard!
+    </div>
   </div>
 
+  <footer class="text-center text-gray-600 text-sm mt-12 pb-6">
+    <p>© Jin tools Tools. All rights reserved.</p>
+  </footer>
 </body>
 
 </html>
