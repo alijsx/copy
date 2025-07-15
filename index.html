@@ -49,7 +49,17 @@
       let toolColor = "";
       let toolIcon = "";
 
- 
+      if (selectedTool === "pak") {
+        toolName = "Pak SEO Tools";
+        loginLink = "https://app.pakseotools.com/";
+        toolColor = "pak";
+        toolIcon = "fas fa-chart-line";
+      } else {
+        toolName = "Jin Tools";
+        loginLink = "https://app.jintools.com/";
+        toolColor = "jin";
+        toolIcon = "fas fa-magic";
+      }
 
       const message = `
 🌟 Your ${toolName} Account Credentials 🌟
@@ -70,9 +80,9 @@ Join our WhatsApp group for updates, offers & giveaways:
 
 📺 Guidance Videos:
 • How to Access on Laptop/PC: 
-  https://shorturl.at/skebg
+   https://shorturl.at/skebg
 • How to Access on Mobile: 
-  https://shorturl.at/IZfwF
+   https://shorturl.at/IZfwF
 
 Thank you for choosing Jin tools 🚀
       `;
