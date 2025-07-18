@@ -48,17 +48,23 @@
       let loginLink = "";
       let toolColor = "";
       let toolIcon = "";
+      let pcLink = "";
+      let mobileLink = "";
 
       if (selectedTool === "pak") {
         toolName = "Pak SEO Tools";
         loginLink = "https://app.pakseotools.com/";
         toolColor = "pak";
         toolIcon = "fas fa-chart-line";
+        pcLink = "https://shorturl.at/skebg";
+        mobileLink = "https://shorturl.at/IZfwF";
       } else {
         toolName = "Jin Tools";
         loginLink = "https://app.jintools.com/";
         toolColor = "jin";
         toolIcon = "fas fa-magic";
+        pcLink = "https://www.loom.com/share/b708c3a587cb4a43ab00dd2763a04779?sid=09eebabc-a7fd-4553-bc83-53034ad075de";
+        mobileLink = "https://www.youtube.com/shorts/VGwiItMNlLo?feature=share";
       }
 
       const message = `
@@ -80,11 +86,11 @@ Join our WhatsApp group for updates, offers & giveaways:
 
 📺 Guidance Videos:
 • How to Access on Laptop/PC: 
-   https://shorturl.at/skebg
+   ${pcLink}
 • How to Access on Mobile: 
-   https://shorturl.at/IZfwF
+   ${mobileLink}
 
-Thank you for choosing Jin tools 🚀
+Thank you for choosing ${toolName} 🚀
       `;
 
       document.getElementById('copy-text').value = message;
@@ -95,6 +101,12 @@ Thank you for choosing Jin tools 🚀
       // Update UI colors
       document.getElementById('copy-btn').className =
         `copy-btn bg-${toolColor}-600 hover:bg-${toolColor}-700 text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-300 inline-flex items-center pulse`;
+
+      // Update tool cards
+      document.querySelectorAll('.tool-card').forEach(card => {
+        card.classList.remove('ring-2', 'ring-blue-500', 'ring-jin-500');
+      });
+      document.getElementById(`${toolName.toLowerCase().replace(' ', '-')}-card`).classList.add('ring-2', `ring-${toolColor}-500`);
     }
 
     function copyToClipboard() {
@@ -321,6 +333,7 @@ Thank you for choosing Jin tools 🚀
     .tool-card {
       transition: all 0.3s ease;
       transform: perspective(1000px) rotateX(0deg);
+      cursor: pointer;
     }
 
     .tool-card:hover {
@@ -378,11 +391,50 @@ Thank you for choosing Jin tools 🚀
     .eye-btn:hover {
       transform: scale(1.1);
     }
+
+    .link-display {
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .dark .link-display {
+      background-color: rgba(30, 41, 59, 0.7);
+    }
+
+    .tool-card.active {
+      transform: scale(1.03);
+      box-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
+      border-width: 2px;
+    }
+
+    .link-icon {
+      animation: pulseIcon 1.5s infinite;
+    }
+
+    @keyframes pulseIcon {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
   </style>
 </head>
 
 <body class="font-sans text-gray-800 dark:text-gray-200 p-4 md:p-8">
-  <div class="max-w-2xl mx-auto">
+  <div class="max-w-3xl mx-auto">
     <div class="text-right mb-4">
       <button id="dark-mode-toggle" onclick="toggleDarkMode()"
         class="p-3 rounded-full bg-white dark:bg-gray-800 shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition">
@@ -420,8 +472,9 @@ Thank you for choosing Jin tools 🚀
             <select id="tool-select"
               class="w-full tool-select border border-gray-300 dark:border-gray-600 rounded-xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 appearance-none bg-white dark:bg-gray-800 dark:text-gray-200"
               onchange="updateMessage()">
-              <option value="pak">Pak SEO Tools</option>
               <option value="jin">Jin Tools</option>
+              <option value="pak">Pak SEO Tools</option>
+             
             </select>
             <div class="absolute right-5 top-1/2 transform -translate-y-1/2 pointer-events-none">
               <i class="fas fa-chevron-down text-gray-400"></i>
@@ -479,7 +532,7 @@ Thank you for choosing Jin tools 🚀
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-      <div
+      <div id="pak-seo-tools-card" onclick="document.getElementById('tool-select').value='pak'; updateMessage();"
         class="tool-card bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/30 p-6 rounded-xl border border-blue-100 dark:border-blue-900/50">
         <div class="flex items-center mb-4">
           <div class="w-12 h-12 rounded-full bg-pak-500 flex items-center justify-center mr-4">
@@ -489,13 +542,28 @@ Thank you for choosing Jin tools 🚀
         </div>
         <p class="text-gray-600 dark:text-gray-300 mb-4">Comprehensive SEO suite with advanced analytics and tracking
           features.</p>
-        <div class="flex items-center text-sm text-blue-600 dark:text-blue-400">
-          <i class="fas fa-link mr-2"></i>
-          <span>https://app.pakseotools.com/</span>
+
+        <div class="mb-2">
+          <div class="flex items-center text-sm text-blue-600 dark:text-blue-400">
+            <i class="fas fa-link mr-2"></i>
+            <span>Login: https://app.pakseotools.com/</span>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <div class="flex items-center text-sm text-blue-500 dark:text-blue-300">
+            <i class="fas fa-desktop mr-2"></i>
+            <span>PC Access: https://shorturl.at/skebg</span>
+          </div>
+        </div>
+
+        <div class="flex items-center text-sm text-blue-500 dark:text-blue-300">
+          <i class="fas fa-mobile-alt mr-2"></i>
+          <span>Mobile Access: https://shorturl.at/IZfwF</span>
         </div>
       </div>
 
-      <div
+      <div id="jin-tools-card" onclick="document.getElementById('tool-select').value='jin'; updateMessage();"
         class="tool-card bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/30 dark:to-violet-900/30 p-6 rounded-xl border border-purple-100 dark:border-purple-900/50">
         <div class="flex items-center mb-4">
           <div class="w-12 h-12 rounded-full bg-jin-500 flex items-center justify-center mr-4">
@@ -505,9 +573,29 @@ Thank you for choosing Jin tools 🚀
         </div>
         <p class="text-gray-600 dark:text-gray-300 mb-4">AI-powered SEO tools for content optimization and performance
           analysis.</p>
-        <div class="flex items-center text-sm text-purple-600 dark:text-purple-400">
-          <i class="fas fa-link mr-2"></i>
-          <span>https://app.jintools.com/</span>
+
+        <div class="mb-2">
+          <div class="flex items-center text-sm text-purple-600 dark:text-purple-400">
+            <i class="fas fa-link mr-2 link-icon"></i>
+            <span>Login: https://app.jintools.com/</span>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <div class="flex items-center text-sm text-purple-500 dark:text-purple-300">
+            <i class="fas fa-desktop mr-2"></i>
+            <span>PC Access: Updated Link</span>
+          </div>
+          <div class="link-display text-xs">
+            https://www.loom.com/share/b708c3a587cb4a43ab00dd2763a04779?sid=09eebabc-a7fd-4553-bc83-53034ad075de</div>
+        </div>
+
+        <div>
+          <div class="flex items-center text-sm text-purple-500 dark:text-purple-300">
+            <i class="fas fa-mobile-alt mr-2"></i>
+            <span>Mobile Access: Updated Link</span>
+          </div>
+          <div class="link-display text-xs">https://www.youtube.com/shorts/VGwiItMNlLo?feature=share</div>
         </div>
       </div>
     </div>
