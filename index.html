@@ -1,12 +1,11 @@
+<!DOCTYPE html>
 <html lang="en" class="dark">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SEO Tools Account Generator</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@700&display=swap"
-    rel="stylesheet">
+  <title>Jin Tools - WhatsApp Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -15,23 +14,11 @@
       theme: {
         extend: {
           colors: {
-            primary: '#4361ee',
-            secondary: '#3f37c9',
-            accent: '#4cc9f0',
-            dark: '#1d3557',
-            light: '#f8f9fa',
             jin: '#8b5cf6',
-            pak: '#3b82f6',
-            darkbg: '#0f172a'
+            'jin-dark': '#7c3aed',
           },
           fontFamily: {
-            'sans': ['Poppins', 'sans-serif'],
-            'fancy': ['Playfair Display', 'serif'],
-            'decorative': ['Dancing Script', 'cursive']
-          },
-          boxShadow: {
-            'custom': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-            'inner-lg': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.15)'
+            'sans': ['Inter', 'sans-serif'],
           }
         }
       }
@@ -40,72 +27,39 @@
   <script>
     function updateMessage() {
       const username = document.getElementById('username').value.trim();
-      const toolSelect = document.getElementById('tool-select');
-      const selectedTool = toolSelect.value;
 
-      let toolName = "";
-      let loginLink = "";
-      let toolColor = "";
-      let toolIcon = "";
-      let pcLink = "";
-      let mobileLink = "";
+      const message = `✨ *Jin Tools Account* ✨
 
-      if (selectedTool === "pak") {
-        toolName = "Pak SEO Tools";
-        loginLink = "https://app.pakseotools.com/";
-        toolColor = "pak";
-        toolIcon = "fas fa-chart-line";
-        pcLink = "https://shorturl.at/skebg";
-        mobileLink = "https://shorturl.at/IZfwF";
-      } else {
-        toolName = "Jin Tools";
-        loginLink = "https://app.jintools.com/";
-        toolColor = "jin";
-        toolIcon = "fas fa-magic";
-        pcLink = "https://www.loom.com/share/b708c3a587cb4a43ab00dd2763a04779?sid=09eebabc-a7fd-4553-bc83-53034ad075de";
-        mobileLink = "https://www.youtube.com/shorts/VGwiItMNlLo";
-      }
+👤 *Username:* ${username}
+🔑 *Password:* ${username}
 
-      const message = `
-🌟 Your ${toolName} Account Credentials 🌟
+🌐 *Login:*
+https://app.jintools.com/
 
-👤 Username: ${username}
-🔑 Password: ${username}
+⚠️ *IMPORTANT:*
+• Login from 1 device only
+• Use 1 browser only  
+• Multiple logins = Auto Block ❌
 
-🌐 Login Link: ${loginLink}
+📺 *Setup Guides:*
 
-📌 Important Notes:
-• Login from only 1 device and 1 browser
-• Multiple logins will result in automatic account blocking
-• No account replacements for policy violations
+💻 *Desktop:*
+https://www.loom.com/share/b708c3a587cb4a43ab00dd2763a04779
 
-📲 Stay Updated:
-Join our WhatsApp group for updates, offers & giveaways:
-👉 https://shorturl.at/KoxoP
+📱 *Mobile:*
+https://www.youtube.com/shorts/VGwiItMNlLo
 
-📺 Guidance Videos:
-• How to Access on Laptop/PC: 
-   ${pcLink}
-• How to Access on Mobile: 
-   ${mobileLink}
+💬 *Join WhatsApp Channel:*
+Get updates, offers & giveaways
+https://whatsapp.com/channel/0029VbCTidA9WtC0o9fBBK3y
 
-Thank you for choosing ${toolName} 🚀
-      `;
+🚀 *Thank you for choosing Jin Tools!*`;
 
       document.getElementById('copy-text').value = message;
-      document.getElementById('tool-icon').className = `${toolIcon} text-3xl text-${toolColor}-500`;
-      document.getElementById('tool-title').innerText = `${toolName} Credentials`;
       document.getElementById('copy-btn').disabled = username === '';
-
-      // Update UI colors
-      document.getElementById('copy-btn').className =
-        `copy-btn bg-${toolColor}-600 hover:bg-${toolColor}-700 text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-300 inline-flex items-center pulse`;
-
-      // Update tool cards
-      document.querySelectorAll('.tool-card').forEach(card => {
-        card.classList.remove('ring-2', 'ring-blue-500', 'ring-jin-500');
-      });
-      document.getElementById(`${toolName.toLowerCase().replace(' ', '-')}-card`).classList.add('ring-2', `ring-${toolColor}-500`);
+      
+      // Update character count
+      document.getElementById('char-count').textContent = message.length;
     }
 
     function copyToClipboard() {
@@ -114,24 +68,30 @@ Thank you for choosing ${toolName} 🚀
       textArea.setSelectionRange(0, 99999);
       document.execCommand("copy");
 
-      // Show toast notification
       const toast = document.getElementById('toast');
       toast.classList.remove('opacity-0', 'translate-y-10');
       toast.classList.add('opacity-100', 'translate-y-0');
 
-      // Button animation
       const btn = document.getElementById('copy-btn');
-      btn.innerHTML = '<i class="fas fa-check mr-3"></i> Copied!';
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check mr-2"></i> Copied!';
       btn.classList.add('copied');
+      
       setTimeout(() => {
-        btn.innerHTML = '<i class="fas fa-copy mr-3"></i> Copy to Clipboard';
+        btn.innerHTML = originalHTML;
         btn.classList.remove('copied');
       }, 2000);
 
       setTimeout(() => {
         toast.classList.remove('opacity-100', 'translate-y-0');
         toast.classList.add('opacity-0', 'translate-y-10');
-      }, 3000);
+      }, 2500);
+    }
+
+    function sendToWhatsApp() {
+      const message = document.getElementById('copy-text').value;
+      const encodedMessage = encodeURIComponent(message);
+      window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
     }
 
     function toggleDarkMode() {
@@ -144,559 +104,425 @@ Thank you for choosing ${toolName} 🚀
     }
 
     function generateRandomUsername() {
-      const prefixes = ['seo', 'digital', 'marketing', 'web', 'analytics', 'growth'];
-      const suffixes = ['pro', 'expert', 'master', 'ninja', 'guru', 'wizard'];
+      const prefixes = ['seo', 'digital', 'web', 'smart', 'pro'];
+      const suffixes = ['expert', 'master', 'ninja', 'guru', 'ace'];
       const numbers = Math.floor(100 + Math.random() * 900);
-
-      const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-      const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
-
-      const username = `${prefix}_${suffix}${numbers}`;
+      const username = `${prefixes[Math.floor(Math.random() * prefixes.length)]}_${suffixes[Math.floor(Math.random() * suffixes.length)]}${numbers}`;
       document.getElementById('username').value = username;
       updateMessage();
     }
 
-    function togglePasswordVisibility() {
-      const textArea = document.getElementById('copy-text');
-      const content = textArea.value;
-
-      if (content.includes('🔑 Password: ********')) {
-        // Restore original password
-        const username = document.getElementById('username').value.trim();
-        const newContent = content.replace('🔑 Password: ********', `🔑 Password: ${username}`);
-        textArea.value = newContent;
-        document.getElementById('eye-icon').className = 'fas fa-eye';
-      } else {
-        // Mask password
-        const newContent = content.replace(/🔑 Password: .+/g, '🔑 Password: ********');
-        textArea.value = newContent;
-        document.getElementById('eye-icon').className = 'fas fa-eye-slash';
-      }
+    function clearUsername() {
+      document.getElementById('username').value = '';
+      updateMessage();
     }
 
-    // Initialize
     document.addEventListener('DOMContentLoaded', function () {
-      // Set dark mode based on preference
       if (localStorage.getItem('darkMode') === 'true') {
         document.documentElement.classList.add('dark');
         document.getElementById('dark-mode-toggle').innerHTML = '<i class="fas fa-sun"></i>';
       }
-
       document.getElementById('copy-btn').disabled = true;
       updateMessage();
     });
   </script>
   <style>
-    body {
-      background: linear-gradient(135deg, #f0f4ff 0%, #e6f0ff 100%);
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233b82f6' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
     }
 
     .dark body {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 1rem;
     }
 
     .card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: white;
       border-radius: 20px;
-      overflow: hidden;
-      background: linear-gradient(145deg, #ffffff, #f5f7ff);
-      box-shadow: 0 15px 30px rgba(67, 97, 238, 0.15);
-      position: relative;
-      z-index: 10;
-      backdrop-filter: blur(10px);
-      background-color: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
     }
 
     .dark .card {
-      background: linear-gradient(145deg, #1e293b, #0f172a);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #1e293b;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
     }
 
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(67, 97, 238, 0.2);
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
     }
 
-    .input-field:focus {
-      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.3);
-    }
-
-    .textarea-field {
-      resize: none;
-      scrollbar-width: thin;
-      scrollbar-color: #4361ee #f1f1f1;
-      background: linear-gradient(to bottom, #fafbff, #f0f4ff);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-    }
-
-    .dark .textarea-field {
-      background: linear-gradient(to bottom, #1e293b, #0f172a);
-      color: #cbd5e1;
-    }
-
-    .textarea-field::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .textarea-field::-webkit-scrollbar-thumb {
-      background-color: #4361ee;
-      border-radius: 4px;
-    }
-
-    .copy-btn {
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 6px 15px rgba(67, 97, 238, 0.3);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-    }
-
-    .copy-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
-    }
-
-    .copy-btn:active {
-      transform: translateY(1px);
-    }
-
-    .copy-btn.copied {
-      background: linear-gradient(to right, #10b981, #059669) !important;
-      box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4) !important;
-    }
-
-    .toast {
-      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-      background: linear-gradient(to right, #4361ee, #3f37c9);
-      box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
-      z-index: 100;
-    }
-
-    .bounce {
-      animation: bounce 1.2s ease infinite;
-    }
-
-    @keyframes bounce {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-15px);
-      }
-    }
-
-    .pulse {
+    .logo {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      border-radius: 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.7);
-      }
-
-      70% {
-        box-shadow: 0 0 0 15px rgba(67, 97, 238, 0);
-      }
-
-      100% {
-        box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
-      }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
-    .tool-select {
-      background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") right 1rem center no-repeat;
-      background-size: 1.5em;
-      appearance: none;
-      font-family: 'Montserrat', sans-serif;
+    .title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 0.5rem;
     }
 
-    .tool-card {
+    .dark .title {
+      color: #f3f4f6;
+    }
+
+    .subtitle {
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+
+    .dark .subtitle {
+      color: #9ca3af;
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #374151;
+      font-size: 0.9rem;
+    }
+
+    .dark .label {
+      color: #d1d5db;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 0.875rem 3rem 0.875rem 1rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 1rem;
       transition: all 0.3s ease;
-      transform: perspective(1000px) rotateX(0deg);
+      background: white;
+    }
+
+    .dark .input-field {
+      background: #0f172a;
+      border-color: #334155;
+      color: #f3f4f6;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+    }
+
+    .input-actions {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      color: #9ca3af;
       cursor: pointer;
+      padding: 0.25rem;
+      transition: all 0.2s;
+      font-size: 1.1rem;
     }
 
-    .tool-card:hover {
-      transform: perspective(1000px) rotateX(5deg);
-      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .gradient-bg {
-      background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
-      background-size: 300% 300%;
-      animation: gradientBG 12s ease infinite;
-    }
-
-
-
-
-
-
-
-
-
-    @keyframes gradientBG {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-
-
-
-
-
-
-
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-
-
-    .fancy-heading {
-      font-family: 'Playfair Display', serif;
-      font-weight: 800;
-      letter-spacing: -0.025em;
-    }
-
-    .decorative-text {
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.5rem;
-    }
-
-
-
-
-    .dark .decorative-text {
-      color: #cbd5e1;
-    }
-
-
-
-
-    .random-btn {
-      transition: all 0.3s ease;
-    }
-
-
-
-
-
-
-
-
-
-
-
-    .random-btn:hover {
-      transform: rotate(15deg) scale(1.1);
-    }
-
-
-
-
-    .eye-btn {
-      transition: all 0.3s ease;
-    }
-
-
-
-
-
-
-
-
-
-    .eye-btn:hover {
+    .icon-btn:hover {
+      color: #8b5cf6;
       transform: scale(1.1);
     }
 
+    .textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      resize: none;
+      font-family: 'Inter', monospace;
+      background: #f9fafb;
+      height: 320px;
+    }
 
-    .link-display {
-      background-color: rgba(255, 255, 255, 0.7);
-      border-radius: 10px;
-      padding: 10px;
-      margin-top: 10px;
+    .dark .textarea {
+      background: #0f172a;
+      border-color: #334155;
+      color: #e5e7eb;
+    }
+
+    .textarea:focus {
+      outline: none;
+      border-color: #8b5cf6;
+    }
+
+    .char-count {
+      text-align: right;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 0.25rem;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      color: white;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-primary.copied {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #8b5cf6;
+      border: 2px solid #8b5cf6;
+      margin-top: 0.75rem;
+    }
+
+    .dark .btn-secondary {
+      background: #1e293b;
+      border-color: #8b5cf6;
+      color: #a78bfa;
+    }
+
+    .btn-secondary:hover {
+      background: #8b5cf6;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .dark .btn-secondary:hover {
+      background: #7c3aed;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      z-index: 1000;
+    }
+
+    .toast.opacity-100 {
+      opacity: 1;
+    }
+
+    .toast.translate-y-0 {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dark-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: white;
+      border: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      color: #8b5cf6;
+      font-size: 1.2rem;
+    }
+
+    .dark .dark-toggle {
+      background: #1e293b;
+      color: #fbbf24;
+    }
+
+    .dark-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .tip {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+      border-left: 4px solid #8b5cf6;
+      padding: 0.875rem;
+      border-radius: 8px;
       font-size: 0.85rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      color: #6b7280;
+      margin-top: 1rem;
     }
 
-    .dark .link-display {
-      background-color: rgba(30, 41, 59, 0.7);
+    .dark .tip {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
+      color: #9ca3af;
     }
 
-
-
-
-
-
-
-
-
-
-    .tool-card.active {
-      transform: scale(1.03);
-      box-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
-      border-width: 2px;
+    .tip i {
+      color: #8b5cf6;
+      margin-right: 0.5rem;
     }
 
-
-
-
-
-    .link-icon {
-      animation: pulseIcon 1.5s infinite;
-    }
-
-
-
-
-
-
-
-
-
-    @keyframes pulseIcon {
-      0% {
-        transform: scale(1);
+    @media (max-width: 640px) {
+      .card {
+        padding: 1.5rem;
       }
-
-      50% {
-        transform: scale(1.1);
+      
+      .title {
+        font-size: 1.5rem;
       }
-
-
-
-
-
-      100% {
-        transform: scale(1);
+      
+      .textarea {
+        height: 280px;
       }
     }
   </style>
-
-
-
-
 </head>
 
-<body class="font-sans text-gray-800 dark:text-gray-200 p-4 md:p-8">
-  <div class="max-w-3xl mx-auto">
-    <div class="text-right mb-4">
-      <button id="dark-mode-toggle" onclick="toggleDarkMode()"
-        class="p-3 rounded-full bg-white dark:bg-gray-800 shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-        <i class="fas fa-moon"></i>
-      </button>
-    </div>
+<body>
+  <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="dark-toggle">
+    <i class="fas fa-moon"></i>
+  </button>
 
-    <header class="text-center mb-10 mt-2">
-      <div class="flex items-center justify-center mb-4">
-        <div class="gradient-bg p-4 rounded-full mr-4 bounce">
-          <i class="fas fa-key text-white text-3xl"></i>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <div class="logo">
+          <i class="fas fa-magic text-white text-2xl"></i>
         </div>
-        <h1
-          class="text-3xl md:text-4xl fancy-heading bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
-          SEO Tools Account Generator</h1>
+        <h1 class="title">Jin Tools Generator</h1>
+        <p class="subtitle">WhatsApp-Ready Credentials</p>
       </div>
-      <p class="text-gray-600 dark:text-gray-300 max-w-md mx-auto">Generate credentials for your preferred SEO tool</p>
-      <p class="decorative-text mt-2 text-blue-600 dark:text-blue-300">Create & share credentials with ease</p>
-    </header>
 
-    <div class="card mb-8">
-      <div class="p-6 md:p-8">
-        <div class="flex items-center mb-6">
-          <i id="tool-icon" class="fas fa-chart-line text-3xl text-pak-500"></i>
-          <h2 id="tool-title" class="text-2xl font-bold ml-3 fancy-heading">Pak SEO Tools Credentials</h2>
-        </div>
-
-        <div class="mb-8">
-          <label for="tool-select"
-            class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center">
-            <i class="fas fa-tools mr-2 text-primary"></i>
-            Select SEO Tool
-          </label>
-          <div class="relative">
-            <select id="tool-select"
-              class="w-full tool-select border border-gray-300 dark:border-gray-600 rounded-xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 appearance-none bg-white dark:bg-gray-800 dark:text-gray-200"
-              onchange="updateMessage()">
-              <option value="jin">Jin Tools</option>
-              <option value="pak">Pak SEO Tools</option>
-             
-            </select>
-            <div class="absolute right-5 top-1/2 transform -translate-y-1/2 pointer-events-none">
-              <i class="fas fa-chevron-down text-gray-400"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="mb-8">
-          <label for="username"
-            class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center">
-            <i class="fas fa-user-circle mr-2 text-primary"></i>
-            Enter Your Username
-          </label>
-          <div class="relative">
-            <input id="username" type="text" placeholder="your_username"
-              class="w-full input-field border border-gray-300 dark:border-gray-600 rounded-xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 bg-white dark:bg-gray-800 dark:text-gray-200"
-              oninput="updateMessage()" />
-            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 flex space-x-2">
-              <button onclick="generateRandomUsername()"
-                class="random-btn text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
-                <i class="fas fa-dice"></i>
-              </button>
-              <div class="text-gray-400">
-                <i class="fas fa-user"></i>
-              </div>
-            </div>
-          </div>
-          <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Enter the username provided to you</p>
-        </div>
-
-        <div class="mb-8">
-          <div class="flex justify-between items-center mb-2">
-            <label class="block text-lg font-medium text-gray-700 dark:text-gray-300 flex items-center">
-              <i class="fas fa-file-alt mr-2 text-primary"></i>
-              Account Information
-            </label>
-            <button onclick="togglePasswordVisibility()"
-              class="eye-btn text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
-              <i id="eye-icon" class="fas fa-eye"></i>
+      <div class="input-group">
+        <label class="label">
+          <i class="fas fa-user mr-2"></i>Username
+        </label>
+        <div class="input-wrapper">
+          <input 
+            id="username" 
+            type="text" 
+            class="input-field" 
+            placeholder="Enter username"
+            oninput="updateMessage()" 
+          />
+          <div class="input-actions">
+            <button onclick="clearUsername()" class="icon-btn" title="Clear">
+              <i class="fas fa-times"></i>
+            </button>
+            <button onclick="generateRandomUsername()" class="icon-btn" title="Random">
+              <i class="fas fa-dice"></i>
             </button>
           </div>
-          <textarea id="copy-text"
-            class="w-full textarea-field h-72 border border-gray-300 dark:border-gray-600 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:text-gray-200"
-            readonly placeholder="Your credentials will appear here after entering username"></textarea>
-        </div>
-
-        <div class="text-center">
-          <button id="copy-btn" onclick="copyToClipboard()"
-            class="copy-btn bg-pak-600 hover:bg-pak-700 text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-300 inline-flex items-center pulse">
-            <i class="fas fa-copy mr-3"></i>
-            Copy to Clipboard
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-      <div id="pak-seo-tools-card" onclick="document.getElementById('tool-select').value='pak'; updateMessage();"
-        class="tool-card bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/30 p-6 rounded-xl border border-blue-100 dark:border-blue-900/50">
-        <div class="flex items-center mb-4">
-          <div class="w-12 h-12 rounded-full bg-pak-500 flex items-center justify-center mr-4">
-            <i class="fas fa-chart-line text-white text-xl"></i>
-          </div>
-          <h3 class="font-semibold text-lg">Pak SEO Tools</h3>
-        </div>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Comprehensive SEO suite with advanced analytics and tracking
-          features.</p>
-
-        <div class="mb-2">
-          <div class="flex items-center text-sm text-blue-600 dark:text-blue-400">
-            <i class="fas fa-link mr-2"></i>
-            <span>Login: https://app.pakseotools.com/</span>
-          </div>
-        </div>
-
-        <div class="mb-2">
-          <div class="flex items-center text-sm text-blue-500 dark:text-blue-300">
-            <i class="fas fa-desktop mr-2"></i>
-            <span>PC Access: https://shorturl.at/skebg</span>
-          </div>
-        </div>
-
-        <div class="flex items-center text-sm text-blue-500 dark:text-blue-300">
-          <i class="fas fa-mobile-alt mr-2"></i>
-          <span>Mobile Access: https://shorturl.at/IZfwF</span>
         </div>
       </div>
 
-      <div id="jin-tools-card" onclick="document.getElementById('tool-select').value='jin'; updateMessage();"
-        class="tool-card bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/30 dark:to-violet-900/30 p-6 rounded-xl border border-purple-100 dark:border-purple-900/50">
-        <div class="flex items-center mb-4">
-          <div class="w-12 h-12 rounded-full bg-jin-500 flex items-center justify-center mr-4">
-            <i class="fas fa-magic text-white text-xl"></i>
-          </div>
-          <h3 class="font-semibold text-lg">Jin Tools</h3>
-        </div>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">AI-powered SEO tools for content optimization and performance
-          analysis.</p>
-
-        <div class="mb-2">
-          <div class="flex items-center text-sm text-purple-600 dark:text-purple-400">
-            <i class="fas fa-link mr-2 link-icon"></i>
-            <span>Login: https://app.jintools.com/</span>
-          </div>
-        </div>
-
-        <div class="mb-2">
-          <div class="flex items-center text-sm text-purple-500 dark:text-purple-300">
-            <i class="fas fa-desktop mr-2"></i>
-            <span>PC Access: Updated Link</span>
-          </div>
-          <div class="link-display text-xs">
-            https://www.loom.com/share/b708c3a587cb4a43ab00dd2763a04779?sid=09eebabc-a7fd-4553-bc83-53034ad075de</div>
-        </div>
-
-        <div>
-          <div class="flex items-center text-sm text-purple-500 dark:text-purple-300">
-            <i class="fas fa-mobile-alt mr-2"></i>
-            <span>Mobile Access: Updated Link</span>
-          </div>
-          <div class="link-display text-xs">https://www.youtube.com/shorts/VGwiItMNlLo?feature=share&themeRefresh=1</div>
+      <div class="input-group">
+        <label class="label">
+          <i class="fab fa-whatsapp mr-2"></i>WhatsApp Message
+        </label>
+        <textarea 
+          id="copy-text" 
+          class="textarea" 
+          readonly
+          placeholder="Your WhatsApp-ready message will appear here..."
+        ></textarea>
+        <div class="char-count">
+          <span id="char-count">0</span> characters
         </div>
       </div>
-    </div>
 
+      <button id="copy-btn" onclick="copyToClipboard()" class="btn btn-primary" disabled>
+        <i class="fas fa-copy"></i>
+        Copy to Clipboard
+      </button>
 
+      <button onclick="sendToWhatsApp()" class="btn btn-secondary">
+        <i class="fab fa-whatsapp"></i>
+        Send to WhatsApp
+      </button>
 
-    <div id="toast"
-      class="toast fixed bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 translate-y-10 text-white px-6 py-3 rounded-full shadow-lg flex items-center">
-      <i class="fas fa-check-circle mr-2"></i>
-      Successfully copied to clipboard!
+      <div class="tip">
+        <i class="fas fa-lightbulb"></i>
+        <strong>Tip:</strong> Message is optimized for WhatsApp with proper formatting and emojis
+      </div>
     </div>
   </div>
 
-
-  <footer class="text-center text-gray-600 dark:text-gray-400 text-sm mt-12 pb-6">
-    <p>© 2023 SEO Tools Account Generator. All rights reserved.</p>
-  </footer>
-
-
-
-
-
-
-
-
-
-
-
-
+  <div id="toast" class="toast">
+    <i class="fas fa-check-circle"></i>
+    Copied successfully!
+  </div>
 </body>
 </html>
